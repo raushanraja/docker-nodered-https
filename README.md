@@ -10,3 +10,6 @@
 - The settings in `settings.js` should be changed to match your setup.
 - The default settings.js created after first run only and is located in `nodered_data/settings.js`
 
+#### How to run it
+- RUN `docker-compose up` in project folder
+
