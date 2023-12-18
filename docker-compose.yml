@@ -1,0 +1,37 @@
+version: '3.7'
+
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portn
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./portainer/data/:/data # create directory
+    # ports:
+    #   - 9000:9000
+    #   - 9443:9443
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    container_name: caddy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro # create file
+      - ./caddy/data:/data # create directory
+      - ./caddy/config:/config # create directory
+
+  node-red:
+    image: nodered/node-red:latest
+    container_name: nodered
+    environment:
+      - TZ=Europe/Amsterdam
+    # ports:
+    #   - "1880:1880"
+    #   - "1883:1883"
+    volumes:
+      - ./nodered_data:/data # create directory

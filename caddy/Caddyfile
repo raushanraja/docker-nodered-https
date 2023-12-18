@@ -1,0 +1,27 @@
+{
+    email CHANGE_TO_YOUR_EMAIL
+    # Optional staging lets encrypt for testing. Comment out for production.
+    # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+portainer.yourdomain {
+    log {
+	level ERROR
+    }
+    reverse_proxy portn:9443
+}
+
+port.yourdomain {
+    log {
+        level ERROR
+    }
+    reverse_proxy portn:9000
+}
+
+node.yourdomain {
+	reverse_proxy nodered:1880
+}
+
+mqtt.yourdomain {
+	reverse_proxy nodered:1883
+}
