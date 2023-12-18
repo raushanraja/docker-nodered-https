@@ -13,3 +13,16 @@
 #### How to run it
 - RUN `docker-compose up` in project folder
 
+
+#### How to stop it
+- RUN `docker-compose down`
+
+
+#### Caddy config
+- File: `caddy/Caddyfile`
+    - yourdomain to your domain
+    - CHANGE_TO_YOUR_EMAIL to your email
+- Make sure there is nothing running on port 80 or 443
+- Make sure port 80 is not blocked by your firewall, to avoid problems with Caddy
+- All generated files are located in `caddy`
+
