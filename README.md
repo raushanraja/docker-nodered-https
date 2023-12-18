@@ -1,6 +1,11 @@
 ### docker-nodered-https
 
 
+#### Images:
+- portainer/portainer-ce:latest
+- caddy:latest
+- nodered/node-red:latest
+
 #### Values to change:
 - File: `caddy/Caddyfile`
     - yourdomain to your domain
@@ -17,6 +22,11 @@
 #### How to stop it
 - RUN `docker-compose down`
 
+
+#### Things to check after first run
+- Please update/set the portainer password on the webpage: https://portainer.yourdomain.com
+    - Change the domain to your domain
+- Please update settingsj.js to add password to NodeRed
 
 #### Caddy config
 - File: `caddy/Caddyfile`
