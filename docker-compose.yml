@@ -31,8 +31,8 @@ services:
       - $PWD/nodered_data:/data # create directory
 
   emqx:
-    image: emqx:5.7.2
-    container_name: emqx1
+    image: emqx:latest
+    container_name: emqx
     healthcheck:
       test: ["CMD", "/opt/emqx/bin/emqx", "ctl", "status"]
       interval: 5s
