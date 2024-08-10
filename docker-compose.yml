@@ -8,10 +8,7 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./portainer/data/:/data # create directory
-    # ports:
-    #   - 9000:9000
-    #   - 9443:9443
+      - $PWD/portainer/data/:/data # create directory
 
   caddy:
     image: caddy:latest
@@ -21,17 +18,29 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro # create file
-      - ./caddy/data:/data # create directory
-      - ./caddy/config:/config # create directory
+      - $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile:ro # create file
+      - $PWD/caddy/data:/data # create directory
+      - $PWD/caddy/config:/config # create directory
 
   node-red:
     image: nodered/node-red:latest
     container_name: nodered
     environment:
       - TZ=Europe/Amsterdam
-    # ports:
-    #   - "1880:1880"
-    #   - "1883:1883"
     volumes:
-      - ./nodered_data:/data # create directory
+      - $PWD/nodered_data:/data # create directory
+
+  emqx:
+    image: emqx:5.7.2
+    container_name: emqx1
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx", "ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    ports:
+      - 8883:8883
+    volumes:
+      - $PWD/emqx/data:/opt/emqx/data
+      - $PWD/emqx/certs/cert.pem:/opt/emqx/etc/certs/cert.pem
+      - $PWD/emqx/certs/key.pem:/opt/emqx/etc/certs/key.pem
